@@ -1,3 +1,5 @@
+// Рендер списков
+
 // export const favouriteBooks = [
 //   { id: "id-1", name: "JS for beginners" },
 //   { id: "id-2", name: "React basics" },
