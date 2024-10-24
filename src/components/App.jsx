@@ -4,7 +4,8 @@
 import './App.css'
 // import Product from './Product';
 // import { BookList, favouriteBooks } from './BookList';
-import { Alert } from './Alert';
+// import { Alert } from './Alert';
+// import CustomButton from './CustomButton/CustomButton';
 
 // export default function App() {
 //   return (
@@ -54,22 +55,62 @@ import { Alert } from './Alert';
 // };
 // export default App;
 
+// const App = () => {
+//   return (
+//     <>
+//       <Alert variant="info">
+//         Would you like to browse our recommended products?
+//       </Alert>
+//       <Alert variant="error" outlined>
+//         There was an error during your last transaction
+//       </Alert>
+//       <Alert variant="success" elevated>
+//         Payment received, thank you for your purchase
+//       </Alert>
+//       <Alert variant="warning" outlined elevated>
+//         Please update your profile contact information
+//       </Alert>
+//     </>
+//   );
+// };
+// export default App;
+
+// const App = () => {
+// 	const handleClick = (evt) => {
+// 		console.log(evt);
+// 	};
+
+// 	return (
+// 		<>
+// 			<button onClick={handleClick}>First button</button>
+// 			<button onClick={evt => console.log(evt)}>Second button</button>
+// 		</>
+// 	);
+// };
+
+// const App = () => {
+//   return (
+//     <>
+//       <CustomButton message="Playing music!">
+//         Play some music
+//       </CustomButton>
+//       <CustomButton message="Uploading your data!">
+//         Upload data
+//       </CustomButton>
+//     </>
+//   );
+// }
+
+import { useState } from 'react';
+
 const App = () => {
-  return (
-    <>
-      <Alert variant="info">
-        Would you like to browse our recommended products?
-      </Alert>
-      <Alert variant="error" outlined>
-        There was an error during your last transaction
-      </Alert>
-      <Alert variant="success" elevated>
-        Payment received, thank you for your purchase
-      </Alert>
-      <Alert variant="warning" outlined elevated>
-        Please update your profile contact information
-      </Alert>
-    </>
-  );
+	const [ clicks, setClicks ] = useState(0);
+
+  const handleClick = () => {
+    // clicks = clicks + 1;
+		setClicks(clicks + 1);
+  };
+
+	return <button onClick={handleClick}>Current: {clicks}</button>
 };
 export default App;
