@@ -101,16 +101,241 @@ import './App.css'
 //   );
 // }
 
-import { useState } from 'react';
+// import { useState } from 'react';
+// import ClickCounter from './ClickCounter/ClickCounter';
 
+// const App = () => {
+// 	const [clicks, setClicks] = useState(0);
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   const handleClick = () => {
+//     setClicks(clicks + 1);
+//   };
+
+//   const handleToggle = () => {
+//     setIsOpen(!isOpen);
+//   };
+
+//   return (
+//     <>
+//       <button onClick={handleClick}>Current: {clicks}</button>
+//       <button onClick={handleToggle}>{isOpen ? "Hide" : "Show"}</button>
+//       {isOpen && <p>Now you can see me!</p>}
+//     </>
+//   );
+// };
+
+// const App = () => {
+//   return (
+//     <>
+// 			<ClickCounter />
+// 			<ClickCounter />
+//     </>
+//   );
+// };
+
+// пример поднятия состояния
+// import { useState } from 'react';
+
+// const App = () => {
+// 	const [clicks, setClicks] = useState(0);
+
+// 	// Функція, яку будемо передавати в ClickCounter
+// 	// для виклику під час кліку
+// 	const handleClick = () => {
+//     setClicks(clicks + 1);
+//   };
+
+//   return (
+//     <>
+// 			<ClickCounter value={clicks} onUpdate={handleClick} />
+// 			<ClickCounter value={clicks} onUpdate={handleClick} />
+//     </>
+//   );
+// };
+
+// import { useState } from 'react';
+// // передаем обьект
+// const App = () => {
+//   const [values, setValues] = useState({
+//     x: 0,
+//     y: 0,
+// 	  });
+	
+// 	const updateX = () => {
+// 			setValues({
+// 			...values,
+// 			x: values.x + 1
+// 		});
+// 	};
+
+// 	const updateY = () => {
+// 		setValues({
+// 			...values,
+// 			y: values.y + 1
+// 		});
+// 	};
+
+//   return (
+//     <div>
+//       <p>
+//         x: {values.x}, y: {values.y}
+//       </p>
+
+//       <button onClick={updateX}>Update x</button>
+//       <button onClick={updateY}>Update y</button>
+//     </div>
+//   );
+// };
+
+// import { useState, useEffect } from "react";
+
+// const App = () => {
+//   const [clicks, setClicks] = useState(0);
+
+//   // Оголошуємо ефект
+//   useEffect(() => {
+//     document.title = `You clicked ${clicks} times`;
+//   });
+
+//   return (
+//     <button onClick={() => setClicks(clicks + 1)}>
+//       You clicked {clicks} times
+//     </button>
+//   );
+// };
+
+// import { useEffect } from "react";
+// const App = () => {
+
+//   useEffect(() => {
+//     setInterval(() => {
+//       console.log(`Interval - ${Date.now()}`);
+//     }, 2000);
+//   }, []);
+
+//   return <div>App</div>;
+// };
+
+// import Modal from './Modal/Modal';
+// import { useState } from 'react';
+
+
+// const App = () => {
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   return (
+//     <div>
+//       <button onClick={() => setIsOpen(!isOpen)}>
+//         {isOpen ? "Close" : "Open"}
+//       </button>
+//       {isOpen && <Modal />}
+//     </div>
+//   );
+// };
+
+// import { useState, useEffect } from "react";
+
+// const App = () => {
+//   const [clicks, setClicks] = useState(0);
+
+// 	// ✅ Залежності вказані правильно
+//   useEffect(() => {
+//     console.log("Clicks updated: ", clicks);
+//   }, [clicks]);
+
+//   return (
+//     <button onClick={() => setClicks(clicks + 1)}>
+//       You clicked {clicks} times
+//     </button>
+//   );
+// };
+
+// import { useState, useEffect } from "react";
+
+// const App = () => {
+//   const [clicks, setClicks] = useState(0);
+
+//   useEffect(() => {
+//     console.log("You can see me only once!");
+//   }, []);
+
+//   useEffect(() => {
+//     console.log("Clicks updated: ", clicks);
+//   }, [clicks]);
+
+//   useEffect(() => {
+//     document.title = `You clicked ${clicks} times`;
+//   });
+
+//   return (
+//     <button onClick={() => setClicks(clicks + 1)}>
+//       You clicked {clicks} times
+//     </button>
+//   );
+// };
+
+// import { useState, useEffect } from "react";
+
+// const App = () => {
+//   const [first, setFirst] = useState(0);
+//   const [second, setSecond] = useState(0);
+
+//   useEffect(() => {
+//     console.log("First updated: ", first);
+//   }, [first]);
+
+//   useEffect(() => {
+//     console.log("Second updated: ", second);
+//   }, [second]);
+
+//   useEffect(() => {
+//     console.log("First or second updated: ", first + second);
+//   }, [first, second]);
+
+//   return (
+//     <>
+//       <button onClick={() => setFirst(first + 1)}>First: {first}</button>
+//       <button onClick={() => setSecond(second + 1)}>Second: {second}</button>
+//     </>
+//   );
+// };
+
+// import { useState } from 'react';
+// const App = () => {
+//   const [clicks, setClicks] = useState(0);
+
+//   return (
+//     <div>
+//       <button onClick={() => setClicks(clicks + 1)}>
+//         You clicked {clicks} times
+//       </button>
+//       <button onClick={() => setClicks(0)}>Reset</button>
+//     </div>
+//   );
+// };
+
+import { useState, useEffect } from 'react';
 const App = () => {
-	const [ clicks, setClicks ] = useState(0);
+  const [clicks, setClicks] = useState(() => {
+    const savedClicks = window.localStorage.getItem("saved-clicks");
+    if (savedClicks !== null) {
+      return Number(savedClicks);
+    }
+    return 0;
+  });
 
-  const handleClick = () => {
-    // clicks = clicks + 1;
-		setClicks(clicks + 1);
-  };
+  useEffect(() => {
+    window.localStorage.setItem("saved-clicks", clicks);
+  }, [clicks]);
 
-	return <button onClick={handleClick}>Current: {clicks}</button>
+  return (
+    <div>
+      <button onClick={() => setClicks(clicks + 1)}>
+        You clicked {clicks} times
+      </button>
+      <button onClick={() => setClicks(0)}>Reset</button>
+    </div>
+  );
 };
 export default App;
