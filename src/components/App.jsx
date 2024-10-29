@@ -1,7 +1,11 @@
 // import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import LangSwitcher from './LangSwitcher/LangSwitcher';
+import LoginForm from './LoginForm/LoginForm';
+import SearchBar from './SearchBar/SearchBar';
 // import Product from './Product';
 // import { BookList, favouriteBooks } from './BookList';
 // import { Alert } from './Alert';
@@ -161,7 +165,7 @@ import './App.css'
 //     x: 0,
 //     y: 0,
 // 	  });
-	
+
 // 	const updateX = () => {
 // 			setValues({
 // 			...values,
@@ -219,7 +223,6 @@ import './App.css'
 
 // import Modal from './Modal/Modal';
 // import { useState } from 'react';
-
 
 // const App = () => {
 //   const [isOpen, setIsOpen] = useState(false);
@@ -315,26 +318,139 @@ import './App.css'
 //   );
 // };
 
-import { useState, useEffect } from 'react';
-const App = () => {
-  const [clicks, setClicks] = useState(() => {
-    const savedClicks = window.localStorage.getItem("saved-clicks");
-    if (savedClicks !== null) {
-      return Number(savedClicks);
-    }
-    return 0;
-  });
+// import { useState, useEffect } from 'react';
+// const App = () => {
+//   const [clicks, setClicks] = useState(() => {
+//     const savedClicks = window.localStorage.getItem("saved-clicks");
+//     if (savedClicks !== null) {
+//       return Number(savedClicks);
+//     }
+//     return 0;
+//   });
 
-  useEffect(() => {
-    window.localStorage.setItem("saved-clicks", clicks);
-  }, [clicks]);
+//   useEffect(() => {
+//     window.localStorage.setItem("saved-clicks", clicks);
+//   }, [clicks]);
+
+//   return (
+//     <div>
+//       <button onClick={() => setClicks(clicks + 1)}>
+//         You clicked {clicks} times
+//       </button>
+//       <button onClick={() => setClicks(0)}>Reset</button>
+//     </div>
+//   );
+// };
+
+// Forms outControl
+
+// const App = () => {
+//   return (
+//     <>
+//       <LoginForm />
+//     </>
+//   );
+// };
+
+// const App = () => {
+//   // Колбек-функція для обробки сабміту форми
+//   const handleLogin = userData => {
+//     // Виконуємо необхідні операції з даними
+//     console.log(userData);
+//   };
+
+//   return (
+//     <div>
+//       <h1>Please login to your account!</h1>
+//       {/* Передаємо колбек як пропс форми */}
+//       <LoginForm onLogin={handleLogin} />
+//     </div>
+//   );
+// };
+
+// onControlElements + Select
+
+// const App = () => {
+//   return (
+//     <>
+//       <SearchBar />
+//     </>
+//   );
+// };
+
+// const App = () => {
+//   const [lang, setLang] = useState('uk');
+
+//   return (
+//     <>
+//       <p>Selected language: {lang}</p>
+//       <LangSwitcher value={lang} onSelect={setLang} />
+//     </>
+//   );
+// };
+
+// RadioButtons
+// const App = () => {
+//   const [coffeeSize, setCoffeeSize] = useState('sm');
+
+//   const handleSizeChange = evt => {
+//     setCoffeeSize(evt.target.value);
+//   };
+
+//   return (
+//     <>
+//       <h1>Select coffee size</h1>
+//       <label>
+//         <input
+//           type="radio"
+//           name="coffeeSize"
+//           value="sm"
+//           checked={coffeeSize === 'sm'}
+//           onChange={handleSizeChange}
+//         />
+//         Small
+//       </label>
+//       <label>
+//         <input
+//           type="radio"
+//           name="coffeeSize"
+//           value="md"
+//           checked={coffeeSize === 'md'}
+//           onChange={handleSizeChange}
+//         />
+//         Meduim
+//       </label>
+//       <label>
+//         <input
+//           type="radio"
+//           name="coffeeSize"
+//           value="lg"
+//           checked={coffeeSize === 'lg'}
+//           onChange={handleSizeChange}
+//         />
+//         Large
+//       </label>
+//     </>
+//   );
+// };
+
+// CheckBox
+const App = () => {
+  const [hasAccepted, setHasAccepted] = useState(false);
+
+  const handleChange = evt => {
+    setHasAccepted(evt.target.checked);
+  };
 
   return (
     <div>
-      <button onClick={() => setClicks(clicks + 1)}>
-        You clicked {clicks} times
+      <label>
+        <input type="checkbox" name="terms" checked={hasAccepted} onChange={handleChange} />I accept
+        terms and conditions
+      </label>
+      <button type="button" disabled={!hasAccepted}>
+        Proceed
       </button>
-      <button onClick={() => setClicks(0)}>Reset</button>
     </div>
   );
 };
