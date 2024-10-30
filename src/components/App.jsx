@@ -4,8 +4,9 @@
 import { useState } from 'react';
 import './App.css';
 import LangSwitcher from './LangSwitcher/LangSwitcher';
-import LoginForm from './LoginForm/LoginForm';
+import FormLogin from './FormLogin/FormLogin';
 import SearchBar from './SearchBar/SearchBar';
+import FeedbackForm from './FeedbackForm/FeedbackForm';
 // import Product from './Product';
 // import { BookList, favouriteBooks } from './BookList';
 // import { Alert } from './Alert';
@@ -435,23 +436,43 @@ import SearchBar from './SearchBar/SearchBar';
 // };
 
 // CheckBox
+// const App = () => {
+//   const [hasAccepted, setHasAccepted] = useState(false);
+
+//   const handleChange = evt => {
+//     setHasAccepted(evt.target.checked);
+//   };
+
+//   return (
+//     <div>
+//       <label>
+//         <input type="checkbox" name="terms" checked={hasAccepted} onChange={handleChange} />I accept
+//         terms and conditions
+//       </label>
+//       <button type="button" disabled={!hasAccepted}>
+//         Proceed
+//       </button>
+//     </div>
+//   );
+// };
+// export default App;
+
+// Form onControl
+
+// const App = () => {
+//   return (
+//     <>
+//       <FormLogin />
+//     </>
+//   );
+// };
+
+// export default App;
+
+// Create Form With Formik
+
 const App = () => {
-  const [hasAccepted, setHasAccepted] = useState(false);
-
-  const handleChange = evt => {
-    setHasAccepted(evt.target.checked);
-  };
-
-  return (
-    <div>
-      <label>
-        <input type="checkbox" name="terms" checked={hasAccepted} onChange={handleChange} />I accept
-        terms and conditions
-      </label>
-      <button type="button" disabled={!hasAccepted}>
-        Proceed
-      </button>
-    </div>
-  );
+  return <FeedbackForm />;
 };
+
 export default App;
