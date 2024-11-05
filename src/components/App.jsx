@@ -575,46 +575,143 @@ import axios from 'axios';
 // };
 
 // Request by user (without useEffect)
-import { fetchArticlesWithTopic } from '../articles-api.js';
-import SearchForm from './SearchForm/SearchForm.jsx';
+// import { fetchArticlesWithTopic } from '../articles-api.js';
+// import SearchForm from './SearchForm/SearchForm.jsx';
 
-const ArticleList = ({ items }) => (
-  <ul>
-    {items.map(({ objectID, url, title }) => (
-      <li key={objectID}>
-        <a href={url} target="_blank" rel="noreferrer noopener">
-          {title}
-        </a>
-      </li>
-    ))}
-  </ul>
-);
+// const ArticleList = ({ items }) => (
+//   <ul>
+//     {items.map(({ objectID, url, title }) => (
+//       <li key={objectID}>
+//         <a href={url} target="_blank" rel="noreferrer noopener">
+//           {title}
+//         </a>
+//       </li>
+//     ))}
+//   </ul>
+// );
+
+// const App = () => {
+//   const [articles, setArticles] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState(false);
+
+//   const handleSearch = async topic => {
+//     try {
+//       setArticles([]);
+//       setError(false);
+//       setLoading(true);
+//       const data = await fetchArticlesWithTopic(topic);
+//       setArticles(data);
+//     } catch (error) {
+//       setError(true);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+//   return (
+//     <div>
+//       <SearchForm onSearch={handleSearch} />
+//       {loading && <p>Loading data, please wait...</p>}
+//       {error && <p>Whoops, something went wrong! Please try reloading this page!</p>}
+//       {articles.length > 0 && <ArticleList items={articles} />}
+//     </div>
+//   );
+// };
+
+// Мемоизация для кэширования результатов работы функции
+// import { useMemo } from 'react';
+
+// const App = () => {
+//   const [planets, setPlanets] = useState(['Earth', 'Mars', 'Jupiter', 'Venus']);
+//   const [query, setQuery] = useState('');
+//   const [clicks, setClicks] = useState(0);
+
+//   const filteredPlanets = useMemo(
+//     () => planets.filter(planet => planet.includes(query)),
+//     [planets, query]
+//   );
+
+//   return (
+//     <>
+//       <button onClick={() => setClicks(clicks + 1)}>Number of clicks: {clicks}</button>
+//       <ul>
+//         {filteredPlanets.map(planet => (
+//           <li key={planet}>{planet}</li>
+//         ))}
+//       </ul>
+//     </>
+//   );
+// };
+
+// useRef + жизненный цикл
+// import { useRef } from 'react';
+
+// const App = () => {
+//   const [value, setValue] = useState(0);
+//   const btnRef = useRef();
+
+//   // Буде undefined на першому рендері
+//   // і посиланням на DOM-елемент всі наступні
+//   console.log('App: ', btnRef.current);
+
+//   useEffect(() => {
+//     // Ефект виконується після монтування,
+//     // тому завжди буде посиланням на DOM-елемент
+//     console.log('useEffect: ', btnRef.current);
+//   });
+
+//   const handleClick = () => {
+//     // Кліки будуть після монтування,
+//     // тому завжди буде посиланням на DOM-елемент
+//     console.log('handleClick: ', btnRef.current);
+//   };
+
+//   return (
+//     <>
+//       <button onClick={() => setValue(value + 1)}>Update value to trigger re-render</button>
+//       <button ref={btnRef} onClick={handleClick}>
+//         Button with ref
+//       </button>
+//     </>
+//   );
+// };
+
+// import { useRef } from 'react';
+
+// const Player = ({ source }) => {
+//   const playerRef = useRef();
+
+//   const play = () => playerRef.current.play();
+
+//   const pause = () => playerRef.current.pause();
+
+//   return (
+//     <div>
+//       <video ref={playerRef} src={source}>
+//         Sorry, your browser does not support embedded videos.
+//       </video>
+//       <div>
+//         <button onClick={play}>Play</button>
+//         <button onClick={pause}>Pause</button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// const App = () => {
+//   return <Player source="http://media.w3.org/2010/05/sintel/trailer.mp4" />;
+// };
+
+// forwardRef когда нужно достучаться до элемента внутри компонента
+import { forwardRef, useRef } from 'react';
+
+const CustomButton = forwardRef((props, ref) => <button ref={ref}>{props.children}</button>);
 
 const App = () => {
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const btnRef = useRef();
 
-  const handleSearch = async topic => {
-    try {
-      setArticles([]);
-      setError(false);
-      setLoading(true);
-      const data = await fetchArticlesWithTopic(topic);
-      setArticles(data);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-  return (
-    <div>
-      <SearchForm onSearch={handleSearch} />
-      {loading && <p>Loading data, please wait...</p>}
-      {error && <p>Whoops, something went wrong! Please try reloading this page!</p>}
-      {articles.length > 0 && <ArticleList items={articles} />}
-    </div>
-  );
+  useEffect(() => btnRef.current.focus(), []);
+
+  return <CustomButton ref={btnRef}>Button with forwarded ref</CustomButton>;
 };
 export default App;
